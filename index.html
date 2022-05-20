@@ -1,0 +1,82 @@
+<h1>DB commands</h1>
+show dbs  -->list the database present in connected cluster
+</br></br>
+use db_name (eg: use sample_airbnb) --> switch to particular db
+</br></br>
+db (or) db.getName() -->get the db_name of connected db
+</br></br>
+db.createCollection("collection_name") -->will create a collection in connected db with given name
+</br></br>
+db.dropDatabase() -->will delete the connected db
+
+<h1>collection commands</h1>
+show collections  -->will return all collections present in connected db
+<br><br>
+db.collection_name.drop() --> will delete the collection
+<br><br>
+db.collection_name.findOne() --> will return the first document present in that specified collection
+<br><br>
+db.collection_name.find()  -->will return first 20 documents and with <b>it</b> command see next 20 documents and so on
+<br><br>
+
+db.collection_name.find().limit(numeric_value)-->return only numeric_value of records.
+<br><br>
+db.collection_name.find().skip(numeric_value)-->skip the first numeric_value records and return remaining records
+<br><br>
+db.collection_name.find().limit(numeric_value).skip(numeric_value)-->skip the first numeric_value records and return numeric_value records
+<br><br>
+
+<h1>CRUD operations</h1>
+<h3>Note: condition must be single object with field-value pair</h3>
+db.collection_name.insertOne({object})  -->will insert one document to the collection
+<br><br>
+db.collection_name.insertMany([{object1},{object2}]) -->will insert multiple documents to the collection. Here <b>[]</b> it denotes array. insertMany function accepts array of objects
+<br><br>
+db.collection_name.deleteOne({condition})-->will delete one document whenever the first matches is true.
+<br><br>
+db.collection_name.deleteMany({condition})-->will delete multiple documents which matches the given condition
+<br><br>
+db.collection_name.updateOne({condition},{$set:{field:value}}) --> will update one record which matches the given condition, if the field is present already it will update its corresponding value else it will add new field-value pair in that record
+<br><br>
+db.collection_name.updateMany({condition},{$set:{field:value}}) --> will update all record which matches the given condition, if the field is present already it will update its corresponding value else it will add new field-value pair in the records
+<br><br>
+db.collection_name.updateOne({condition},{$inc:{field:value}})-->will increase the field value by defined value for first record which matches the condition.
+<br><br>
+db.collection_name.updateMany({condition},{$inc:{field:value}})-->will increase the field value by defined value for all records which matches the condition.
+<br><br>
+db.collection_name.updateOne({condition},{$push:{field:value}})-->will push the given value to array field, here the field must be already present and it should an array type
+<br><br>
+
+<h1>operators</h1>
+<h2>comparison operators</h2>
+eq -->equal operator usage: {field:{$eq:"value"}}
+<br><br>
+ne -->not equal usage: {field:{$ne:"value"}}
+<br><br>
+gt-->greater than usage: {field:{$gt:value}}
+<br><br>
+gte--> greater than or equal to usage: {field:{$gte:value}}
+<br><br>
+lt -->less than
+<br><br>
+lte -->less than or equal to
+<br><br>
+in--> used to match any value in the given array usage: {field:{$in:["value1","value2","value3",......, so on]}}
+<br><br>nin --> used to match other value in the given array usage: {field:{$nin:["value1","value2",....,so on]}}
+
+
+<h2>logical operators</h2>
+and --> returns records when all given condition is true usage: {$and:[{condition1},{condition2},...,so on]}
+<br><br>
+or -->returns records when any one condition is true usage: {$or:[{condition1},{condition2},...,so on]}
+<br><br>
+nor --> returns records when all condition is false usage: {$nor:[{condition1},{condition2},...,so on]}
+<br><br>
+not --> inverse the conditions specified usage: {$not:{condition}}
+
+<h2>array query operators</h2>
+all --> returns records when given array matches without checking orders usage: {field:{$all:["value1","value2",...,so on]}}
+<br><br>
+elemMatch--> returns records with conditions in the array usage: {field:{$elemMatch:{condition1,condition2}}}
+<br><br>
+size --> returns array which having the given size(length) usage: {field:{$size:value}}
